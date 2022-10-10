@@ -19,7 +19,7 @@ const largeArrayOperation = async (values, action) => {
 };
 exports.largeArrayOperation = largeArrayOperation;
 const largeArrayOperationInPlace = async (values, action) => {
-    await values.forEach(async (arr) => {
+    values.forEach(async (arr) => {
         await action.callable(arr);
     });
 };

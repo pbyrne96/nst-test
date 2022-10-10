@@ -57,7 +57,7 @@ export const largeArrayOperationInPlace = async <T extends object>(
        @action -> an interface containing an async function
     */
 
-  await values.forEach(async (arr: T[]) => {
+  values.forEach(async (arr: T[]) => {
     await action.callable(arr);
   });
 };
