@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.readFromPromise = exports.largeArrayOperationInPlace = exports.largeArrayOperation = exports.chunkArray = void 0;
+exports.constUnpackChunkOperation = exports.readFromPromise = exports.largeArrayOperationInPlace = exports.largeArrayOperation = exports.chunkArray = void 0;
 const getOptimalChunkSize = (values) => {
     [...values];
     return 6;
@@ -32,4 +32,8 @@ const readFromPromise = (values) => {
     return unpackPromise;
 };
 exports.readFromPromise = readFromPromise;
+const constUnpackChunkOperation = (values, action) => {
+    return (0, exports.readFromPromise)((0, exports.largeArrayOperation)(values, action));
+};
+exports.constUnpackChunkOperation = constUnpackChunkOperation;
 //# sourceMappingURL=optimizeUtils.js.map

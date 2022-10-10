@@ -1,3 +1,5 @@
+import { CallOperation } from './models';
+
 const getOptimalChunkSize = <T extends object>(values: T[]): number => {
   /*
     Function for returning the optimal chunk size for a given input
@@ -22,10 +24,6 @@ export const chunkArray = <T extends object>(values: T[]): T[] => {
     );
   return chunks(values) as T[];
 };
-
-export interface CallOperation<T> {
-  callable(arg: T[]): Promise<T[]>;
-}
 
 export const largeArrayOperation = async <T extends object>(
   values: [T[]],
@@ -73,4 +71,11 @@ export const readFromPromise = <T extends object>(
   });
 
   return unpackPromise;
+};
+
+export const constUnpackChunkOperation = <T extends object>(
+  values: [T[]],
+  action: CallOperation<T>,
+): [T[]] => {
+  return readFromPromise(largeArrayOperation(values, action));
 };
