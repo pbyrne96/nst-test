@@ -13,7 +13,7 @@ export class DataClass {
     process.env.POSTGRESQL || null;
   public fetchedData: DataQuery<Buffer>;
 
-  constructor(private readonly appService: AppService) {
+  constructor(appService: AppService) {
     this.appServices = appService;
     // certain constructor elements will load a class fileData -> this will top level info with most being lazyLoaded
 
