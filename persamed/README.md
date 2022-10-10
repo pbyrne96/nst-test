@@ -32,3 +32,12 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+.ENV includes the following so far
+
+        ```ini
+        POSTGRES_URL=''
+        GRAPH_DB_URL=''
+        AWS_API_VERSION='latest'
+        AWS_REGION='eu-west-1'
+
+        ```
