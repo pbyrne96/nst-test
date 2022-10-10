@@ -14,7 +14,7 @@ let AppService = class AppService {
         return 'Hello World!';
     }
     getFileData() {
-        const newObject = new app_gatherData_1.DataClass(this).getData();
+        new app_gatherData_1.DataClass(this).getData();
         return [];
     }
 };

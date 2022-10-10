@@ -1,11 +1,28 @@
 import { CallOperation } from './models';
 
+export const getSizeOfArrayInBytes = <T extends object>(
+  values: T[],
+): number => {
+  return new Uint8Array(new ArrayBuffer(values.length)).byteLength;
+};
+
 const getOptimalChunkSize = <T extends object>(values: T[]): number => {
   /*
     Function for returning the optimal chunk size for a given input
+    will need various IO helper operations/functions on a given data point
+    TODO: -->
+        calculate size of a given array tracks the memory bound on the os and gives the optimum chunk size
   */
   [...values];
   return 6;
+};
+
+const chunkLargeArrayAndPerformOperation = <T extends object>(
+  values: T[],
+  callable: CallOperation<T>,
+): number => {
+  /* */
+  return 0;
 };
 
 export const chunkArray = <T extends object>(values: T[]): T[] => {

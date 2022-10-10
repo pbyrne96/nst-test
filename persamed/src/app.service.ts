@@ -7,7 +7,7 @@ export class AppService {
   }
 
   getFileData(): Buffer[] {
-    const newObject = new DataClass(this).getData();
+    new DataClass(this).getData();
     return [] as Buffer[];
   }
 }
