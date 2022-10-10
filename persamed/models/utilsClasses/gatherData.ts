@@ -1,8 +1,8 @@
 import { Get, Module } from '@nestjs/common';
 import { DataQuery } from 'models/models';
-import { AppController } from '../src/app.controller';
-import { AppModule } from '../src/app.module';
-import { AppService } from '../src/app.service';
+import { AppController } from '../../src/app.controller';
+import { AppModule } from '../../src/app.module';
+import { AppService } from '../../src/app.service';
 
 enum DataSettings {
   default = 'default',
