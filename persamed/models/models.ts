@@ -17,6 +17,21 @@
             and utilize generics where only needed as can slow the compiler
 */
 
+// example lazy load on an object literal
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const example = {
+  get data() {
+    const _data = {}; // heavy operation call here -> like call to a db or a property on an object literal
+    Object.defineProperty(this, 'data', {
+      value: _data,
+      writable: false,
+      configurable: false,
+      enumerable: false,
+    });
+    return _data;
+  },
+};
+
 export interface OnFileReturn<T> {
   /*
     this file will ether be an ArrayBuffer containing file chunks
