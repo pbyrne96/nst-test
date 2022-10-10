@@ -22,6 +22,7 @@ let DataClass = class DataClass {
         this.appService = appService;
         this.dataSettings = DataSettings.default;
         this.dbConnection = null;
+        this.appService = appService;
     }
     getData() {
         return [];
@@ -35,12 +36,15 @@ let DataClass = class DataClass {
     encryptLargeFile() {
         return '';
     }
+    decryptLargeFile() {
+        return '';
+    }
     getFileSize() {
         return '';
     }
 };
 __decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)('data'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Object)

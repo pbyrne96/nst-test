@@ -1,4 +1,4 @@
-import { OnFileReturn } from './models';
+import { OnFileReturn, DataQuery } from './models';
 import { chunkArray } from './optimizeUtils';
 
-export { OnFileReturn, chunkArray };
+export { OnFileReturn, chunkArray, DataQuery };

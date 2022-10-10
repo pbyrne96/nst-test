@@ -14,10 +14,13 @@ enum DataSettings {
 export class DataClass {
   private readonly dataSettings: DataSettings = DataSettings.default;
   private readonly dbConnection: string | null = null;
+  private readonly appServices: AppService;
 
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) {
+    this.appService = appService;
+  }
 
-  @Get()
+  @Get('data')
   getData(): Buffer[] | undefined {
     return [] as Buffer[];
   }
@@ -32,6 +35,10 @@ export class DataClass {
   }
 
   private encryptLargeFile(): string {
+    return '';
+  }
+
+  private decryptLargeFile(): string {
     return '';
   }
 

@@ -4,3 +4,8 @@ export interface OnFileReturn<T> {
 export interface CallOperation<T> {
     callable(arg: T[]): Promise<T[]>;
 }
+export interface DataQuery<T> {
+    success: boolean;
+    returnSize: number;
+    data?: T[];
+}
