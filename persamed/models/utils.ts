@@ -1,4 +1,4 @@
-export const encrpyt = () => {
+export const encrypt = () => {
   return;
 };
 

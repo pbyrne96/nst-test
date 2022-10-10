@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.decrypt = exports.encrpyt = void 0;
-const encrpyt = () => {
+exports.decrypt = exports.encrypt = void 0;
+const encrypt = () => {
     return;
 };
-exports.encrpyt = encrpyt;
+exports.encrypt = encrypt;
 const decrypt = () => {
     return;
 };
