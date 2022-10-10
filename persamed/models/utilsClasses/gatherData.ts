@@ -1,35 +1,27 @@
-import { Get, Module } from '@nestjs/common';
 import { DataQuery } from 'models/models';
-import { AppController } from '../../src/app.controller';
-import { AppModule } from '../../src/app.module';
 import { AppService } from '../../src/app.service';
 
 enum DataSettings {
   default = 'default',
 }
 
-@Module({
-  imports: [AppModule],
-  controllers: [AppController],
-  providers: [AppService],
-})
 export class DataClass {
   private readonly dataSettings: DataSettings = DataSettings.default;
   private readonly dbConnection: string | null = null;
   private readonly appServices: AppService;
   private static readonly dbConnection: string | null =
     process.env.POSTGRESQL || null;
-  public topLevelData: DataQuery<object>;
+  public fetchedData: DataQuery<Buffer>;
 
   constructor(private readonly appService: AppService) {
     this.appServices = appService;
     // certain constructor elements will load a class fileData -> this will top level info with most being lazyLoaded
 
     if (DataClass.dbConnection) {
-      Object.defineProperty(this, 'data', {
+      Object.defineProperty(this, 'fetchedData', {
         get() {
           const dataQuery = {}; // call to db
-          Object.defineProperty(this, 'data', {
+          Object.defineProperty(this, 'fetchedData', {
             value: dataQuery,
             writable: false,
             configurable: false,
@@ -42,10 +34,8 @@ export class DataClass {
     }
   }
 
-  @Get('data')
   getData(): Buffer[] | undefined {
-    this.appServices.getFileData();
-    return [] as Buffer[];
+    return this.fetchedData.data ? this.fetchedData.data : ([] as Buffer[]);
   }
 
   // Stating abstract methods

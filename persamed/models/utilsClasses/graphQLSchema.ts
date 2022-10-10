@@ -1,7 +1,7 @@
 import { getDirective, MapperKind, mapSchema } from '@graphql-tools/utils';
 import { defaultFieldResolver, GraphQLSchema } from 'graphql';
 
-class _GraphQLSchema {
+export class _GraphQLSchema {
   constructor() {
     // will need to init db Connection here
   }
