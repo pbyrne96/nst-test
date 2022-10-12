@@ -1,9 +1,25 @@
 import { CallOperation } from './models';
 
-export const getSizeOfArrayInBytes = <T extends object>(
-  values: T[],
-): number => {
-  return new Uint8Array(new ArrayBuffer(values.length)).byteLength;
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const os = require('os');
+
+export const getSizeOfArrayInBytes = <T>(values: T[]): number => {
+  return JSON.stringify(values).replace(/[\[\]\,\"]/g, '').length;
+};
+
+export const findAvailableMemory = <T>(values: T[]): number => {
+  // will find the available memory to be to calculate the amount of chunks
+  /*
+    THIS FUNCTION WILL BE HELPFUL IN EDGE COMPUTATION --> RECOMMENDED TO FIND MEMORY IN STREAM PROCESSING
+    It will be bound to an IO task on the cloud and will be able to help split the amount of nodes needed
+    i.e lambda functions and so on.
+  */
+  const arraySizeInBytes = getSizeOfArrayInBytes(values);
+  const freeMemory = os.freemem();
+  if (arraySizeInBytes > Math.ceil(freeMemory / 2)) {
+    return Math.ceil(freeMemory - arraySizeInBytes);
+  }
+  return arraySizeInBytes;
 };
 
 export const getOptimalChunkSize = (): number => {
@@ -17,7 +33,7 @@ export const getOptimalChunkSize = (): number => {
   return 6;
 };
 
-export const chunkArray = <T extends object>(values: T[]): [T[]] => {
+export const chunkArray = <T>(values: T[]): [T[]] => {
   const chunkDepth = getOptimalChunkSize();
   const chunks = (a: T[]) =>
     Array.from(new Array(Math.ceil(a.length / chunkDepth)), (_, i) =>
@@ -26,7 +42,7 @@ export const chunkArray = <T extends object>(values: T[]): [T[]] => {
   return chunks(values) as [T[]];
 };
 
-export const chunkLargeArrayAndPerformOperation = <T extends object>(
+export const chunkLargeArrayAndPerformOperation = <T>(
   values: T[],
   action: CallOperation<T>,
 ): void => {
@@ -54,7 +70,7 @@ export const chunkLargeArrayAndPerformOperation = <T extends object>(
   }
 };
 
-export const largeArrayOperation = async <T extends object>(
+export const largeArrayOperation = async <T>(
   values: [T[]],
   action: CallOperation<T>,
 ): Promise<[T[]]> => {
@@ -77,7 +93,7 @@ export const largeArrayOperation = async <T extends object>(
   return newValues as unknown as Promise<[T[]]>;
 };
 
-export const largeArrayOperationInPlace = async <T extends object>(
+export const largeArrayOperationInPlace = async <T>(
   values: [T[]],
   action: CallOperation<T>,
 ): Promise<void> => {
@@ -94,9 +110,7 @@ export const largeArrayOperationInPlace = async <T extends object>(
   });
 };
 
-export const readFromPromise = <T extends object>(
-  values: Promise<[T[]]>,
-): [T[]] => {
+export const readFromPromise = <T>(values: Promise<[T[]]>): [T[]] => {
   /*
       params:
        @values -> an already chunked array inside a promise
@@ -111,7 +125,7 @@ export const readFromPromise = <T extends object>(
   return unpackPromise;
 };
 
-export const constUnpackChunkOperation = <T extends object>(
+export const constUnpackChunkOperation = <T>(
   values: [T[]],
   action: CallOperation<T>,
 ): [T[]] => {
@@ -122,3 +136,5 @@ export const constUnpackChunkOperation = <T extends object>(
   */
   return readFromPromise(largeArrayOperation(values, action));
 };
+
+findAvailableMemory(Array.from(Array(64 * 8).keys()));
