@@ -8,33 +8,34 @@ export const getSizeOfArrayInBytes = <T>(values: T[]): number => {
 };
 
 export const findAvailableMemory = <T>(values: T[]): number => {
-  // will find the available memory to be to calculate the amount of chunks
   /*
-    THIS FUNCTION WILL BE HELPFUL IN EDGE COMPUTATION --> RECOMMENDED TO FIND MEMORY IN STREAM PROCESSING
+    THIS FUNCTION WILL BE HELPFUL IN EDGE COMPUTATION -->
+    Recommended to calculate current memory use in order to request more worked nodes
     It will be bound to an IO task on the cloud and will be able to help split the amount of nodes needed
     i.e lambda functions and so on.
+
+    TODO: -> when terraform integrated -> pool remaining data into a new node and wait for current computation to be completed
   */
   const arraySizeInBytes = getSizeOfArrayInBytes(values);
-  const freeMemory = os.freemem();
+  const freeMemory = os.freemem(); // may have to change to a function which compute current memory alloc in AWS
   if (arraySizeInBytes > Math.ceil(freeMemory / 2)) {
     return Math.ceil(freeMemory - arraySizeInBytes);
   }
   return arraySizeInBytes;
 };
 
-export const getOptimalChunkSize = (): number => {
+export const getOptimalChunkSize = <T>(values: T[]): number => {
   /*
     Function for returning the optimal chunk size for a given input
     will need various IO helper operations/functions on a given data point
-    TODO: -->
-        calculate size of a given array tracks the memory bound on the os and gives the optimum chunk size
   */
-
-  return 6;
+  const freeMemory = findAvailableMemory(values);
+  const chunkSize = Math.max(Math.floor(values.length / freeMemory), 6);
+  return chunkSize;
 };
 
 export const chunkArray = <T>(values: T[]): [T[]] => {
-  const chunkDepth = getOptimalChunkSize();
+  const chunkDepth = getOptimalChunkSize(values);
   const chunks = (a: T[]) =>
     Array.from(new Array(Math.ceil(a.length / chunkDepth)), (_, i) =>
       a.slice(i * chunkDepth, i * chunkDepth + chunkDepth),
@@ -136,5 +137,3 @@ export const constUnpackChunkOperation = <T>(
   */
   return readFromPromise(largeArrayOperation(values, action));
 };
-
-findAvailableMemory(Array.from(Array(64 * 8).keys()));
