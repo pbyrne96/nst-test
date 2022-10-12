@@ -30,8 +30,8 @@ export const getOptimalChunkSize = <T>(values: T[]): number => {
     will need various IO helper operations/functions on a given data point
   */
   const freeMemory = findAvailableMemory(values);
-  const chunkSize = Math.max(Math.floor(values.length / freeMemory), 6);
-  return chunkSize;
+  const chunkSize = Math.max(Math.floor(values.length / freeMemory), 1);
+  return chunkSize >= 1 ? chunkSize : 6;
 };
 
 export const chunkArray = <T>(values: T[]): [T[]] => {
