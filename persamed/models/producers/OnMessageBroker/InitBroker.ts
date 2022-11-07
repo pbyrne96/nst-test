@@ -39,7 +39,7 @@ export class InitBroker {
 
   /**
    * requestNode
- */
+   */
   public requestNode(): WorkerNode {
     // pings workerNode for memory or a worker node task to execute incoming data
     return {
