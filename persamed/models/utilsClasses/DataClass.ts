@@ -39,23 +39,23 @@ export class DataClass {
   }
 
   // Stating abstract methods
-  private fileToBufferArray(): Buffer[] {
+  fileToBufferArray(): Buffer[] {
     return [] as Buffer[];
   }
 
-  private chunkLargeFile(): [Buffer[]] {
+  chunkLargeFile(): [Buffer[]] {
     return [[]] as [Buffer[]];
   }
 
-  private encryptLargeFile(): string {
+  encryptLargeFile(): string {
     return '';
   }
 
-  private decryptLargeFile(): string {
+  decryptLargeFile(): string {
     return '';
   }
 
-  private getFileSize(): string {
+  getFileSize(): string {
     return '';
   }
 }
