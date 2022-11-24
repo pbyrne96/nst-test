@@ -14,4 +14,16 @@ export class OnSubmitJob {
     // will get the memory given alongside a request
     return 0;
   }
+
+  truncData(): void {
+    // will split the data in a request into smaller chunks in a peer to peer approach
+  }
+
+  joinTruncedData(): any {
+    // will join jobs/data objects that have been trunced into one space
+  }
+
+  run(): void {
+    // method that runs the tasks of asking for worker nodes from the system
+  }
 }
