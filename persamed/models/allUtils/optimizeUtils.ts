@@ -1,4 +1,4 @@
-import { CallOperation } from './models';
+import { CallOperation } from '../models';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const os = require('os');

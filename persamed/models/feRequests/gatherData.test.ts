@@ -11,7 +11,8 @@ describe('gatherDataTest', () => {
       controllers: [AppController],
       providers: [AppService],
     }).compile();
-
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     DataClass = Data.get<AppController>(AppController);
   });
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DataClass } from '../models/utilsClasses/DataClass';
+import { DataClass } from '../models/feRequests/DataClass';
 @Injectable()
 export class AppService {
   getHello(): string {
