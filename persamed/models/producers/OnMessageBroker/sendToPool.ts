@@ -1,0 +1,6 @@
+/*
+    this will act a cache for jobs that were to big to process
+    with other current jobs or the master node did not detect any memory available
+    this will be in control of pinging back to the master node
+    while jobs are in the Queue
+*/

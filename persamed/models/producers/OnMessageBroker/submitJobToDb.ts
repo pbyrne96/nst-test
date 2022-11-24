@@ -1,0 +1,4 @@
+/*
+    this class will act as worker node.
+    it will process the given data and attempt to submit to db
+*/
