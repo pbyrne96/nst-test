@@ -8,13 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppService = void 0;
 const common_1 = require("@nestjs/common");
-const gatherData_1 = require("../models/gatherData");
+const DataClass_1 = require("../models/feRequests/DataClass");
 let AppService = class AppService {
     getHello() {
         return 'Hello World!';
     }
     getFileData() {
-        new gatherData_1.DataClass(this).getData();
+        new DataClass_1.DataClass(this).getData();
         return [];
     }
 };
